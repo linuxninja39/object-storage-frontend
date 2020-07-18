@@ -1,0 +1,26 @@
+<h1>Files:</h1>
+
+<div style="display: flex">
+  <div style="justify-content: flex-start">
+    <mat-selection-list [multiple]="false">
+      <mat-list-option *ngFor="let file of files" [value]="file" (click)="getPreview(file)">
+        {{file}}
+      </mat-list-option>
+    </mat-selection-list>
+  </div>
+  <div style="width: 800px">
+    <div [ngSwitch]="fileType">
+      <div *ngSwitchCase="'pdf'">
+        <ng2-pdfjs-viewer [pdfSrc]="fileSrc"></ng2-pdfjs-viewer>
+      </div>
+      <div *ngSwitchCase="'image'">
+        <img [src]="fileSrc" alt="image">
+      </div>
+      <div *ngSwitchCase="'mp4'">
+        <video width="320" height="240" controls>
+          <source [src]="fileSrc" type="video/mp4">
+        </video>
+      </div>
+    </div>
+  </div>
+</div>
